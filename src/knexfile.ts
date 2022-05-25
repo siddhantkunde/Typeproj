@@ -1,10 +1,8 @@
-import  { Knex } from "knex";
-import path from "path";
+import type { Knex } from "knex";
 
 // Update with your config settings.
 
 const config: { [key: string]: Knex.Config } = {
-  
   development: {
     client: "postgresql",
     connection: {
@@ -17,7 +15,7 @@ const config: { [key: string]: Knex.Config } = {
       max: 10
     },
     migrations: {
-      directory: path.join(__dirname, 'src/db/migrations')
+      tableName: "knex_migrations"
     }
   },
 
