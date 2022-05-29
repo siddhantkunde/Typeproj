@@ -16,7 +16,7 @@ function up(knex) {
             table.increments();
             table.string("name").notNullable().unique();
             table.string("email").notNullable().unique();
-            table.string("phone");
+            table.bigInteger("phone");
             table.string("password").notNullable();
             table.timestamps(true, true);
         });

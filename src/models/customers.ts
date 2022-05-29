@@ -1,8 +1,8 @@
 const {Model} = require('objection')
 
-export class Customer extends Model {
+export default class Customer extends Model {
 	static get tableName() {
-		return 'users';
+		return "users";
 	}
 }
-module.exports = Customer
+
