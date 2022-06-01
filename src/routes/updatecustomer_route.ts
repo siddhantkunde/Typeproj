@@ -5,7 +5,7 @@ const verify=require('./verify_route')
 
 
 // Update name  using id
-router.patch('/users/:id', verify, async(req:Request,res:Response,next:NextFunction)=>{
+router.put('/users/:id', verify, async(req:Request,res:Response,next:NextFunction)=>{
     try{
       const{ id }=req.params;
       const users = await Customer.query().where({ id })
@@ -16,7 +16,7 @@ router.patch('/users/:id', verify, async(req:Request,res:Response,next:NextFunct
       res.json(users);
     }catch(err){
        console.error(err);
-       res.status(500).json(err);
+       res.status(500).json(err).send('Invalid name');
     }
  });
 

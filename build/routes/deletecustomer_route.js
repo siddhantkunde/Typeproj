@@ -24,7 +24,8 @@ router.delete('/users/:id', verify, (req, res, next) => __awaiter(void 0, void 0
     }
     catch (err) {
         console.error(err);
-        res.status(500).json(err);
+        res.status(500).json(err).send('User is not deleted');
+        ;
     }
 }));
 module.exports = router;

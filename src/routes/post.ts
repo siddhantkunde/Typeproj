@@ -10,7 +10,7 @@ router.get('/user/:id',verify,async (req:Request,res:Response) => {
         res.json(user);
     } catch (error) {
         console.error(error)
-        res.status(500).json(error)
+        res.status(500).json(error).send('access Denied');
     }
 })
 

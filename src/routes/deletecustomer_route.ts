@@ -13,7 +13,7 @@ router.delete('/users/:id', verify,async(req:Request,res:Response,next:NextFunct
  
     }catch(err){
        console.error(err);
-       res.status(500).json(err);
+       res.status(500).json(err).send('User is not deleted');;
     }
  
  });

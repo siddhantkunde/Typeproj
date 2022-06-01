@@ -13,11 +13,13 @@ declare module "express" {
 
 module.exports=function (req:Request,res:Response,next:NextFunction){
     const token =req.header('auth-token');
+    
     if(!token)return res.status(401).send('access Denied');
 
     try{
         const verified = jwt.verify (token,SECRET);
         req.user=verified;
+        
         next();
 
     }catch(error){

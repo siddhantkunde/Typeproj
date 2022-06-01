@@ -23,7 +23,7 @@ router.get('/user/:id', verify, (req, res) => __awaiter(void 0, void 0, void 0, 
     }
     catch (error) {
         console.error(error);
-        res.status(500).json(error);
+        res.status(500).json(error).send('access Denied');
     }
 }));
 module.exports = router;

@@ -16,7 +16,7 @@ const customers_1 = __importDefault(require("../models/customers"));
 const router = require('express').Router();
 const verify = require('./verify_route');
 // Update name  using id
-router.patch('/users/:id', verify, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.put('/users/:id', verify, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
         const users = yield customers_1.default.query().where({ id })
@@ -28,7 +28,7 @@ router.patch('/users/:id', verify, (req, res, next) => __awaiter(void 0, void 0,
     }
     catch (err) {
         console.error(err);
-        res.status(500).json(err);
+        res.status(500).json(err).send('Invalid name');
     }
 }));
 module.exports = router;
