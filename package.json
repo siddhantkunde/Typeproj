@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js ",
   "scripts": {
-    "start": "npx tsc && nodemon build/app.js",
+    "start": "nodemon build/app.js && npx tsc ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

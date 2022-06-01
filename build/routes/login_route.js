@@ -98,6 +98,3 @@ router.post('/login', (req, res, next) => __awaiter(void 0, void 0, void 0, func
     res.status(200).send(token);
 }));
 module.exports = router;
-function isMobilePhone() {
-    throw new Error("Function not implemented.");
-}

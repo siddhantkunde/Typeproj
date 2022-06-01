@@ -1,4 +1,4 @@
-import Orders from "../models/orders";
+import Orders from "../../models/orders";
 const router = require('express').Router();
 import express ,{Application,NextFunction,Request,Response}from 'express';
 
