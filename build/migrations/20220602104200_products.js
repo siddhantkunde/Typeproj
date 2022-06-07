@@ -15,7 +15,7 @@ function up(knex) {
         return knex.schema.createTable('products', (table) => {
             table.increments();
             table.integer('user_id');
-            table.foreign('user_id').references('id').inTable('users').index().onDelete('cascade');
+            table.foreign('user_id').references('id').inTable('users').onDelete('cascade');
             table.string("name").notNullable();
             table.string("category").notNullable();
             table.integer("price").notNullable();

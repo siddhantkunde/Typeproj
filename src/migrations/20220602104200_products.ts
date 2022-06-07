@@ -5,7 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable('products',(table: Knex.TableBuilder)=>{
         table.increments()
         table.integer('user_id')
-        table.foreign('user_id').references('id').inTable('users').index().onDelete('cascade');
+        table.foreign('user_id').references('id').inTable('users').onDelete('cascade');
         table.string("name").notNullable()
         table.string("category").notNullable()
         table.integer("price").notNullable()

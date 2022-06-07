@@ -1,12 +1,12 @@
 const router = require('express').Router();
-import Customer from "../models/customers";
+import User from "../models/customers";
 const verify=require('./verify_route')
 import express ,{Application,NextFunction,Request,Response}from 'express';
 
 router.get('/user/:id',verify,async (req:Request,res:Response) => {
     try {
         const { id } = req.params;
-        const user = await Customer.query().findById(id);
+        const user = await User.query().findById(id);
         res.json(user);
     } catch (error) {
         console.error(error)

@@ -1,5 +1,5 @@
 
-import Customer from "../models/customers";
+import User from "../models/customers";
 import express ,{Application,NextFunction,Request,Response}from 'express';
 const router = require('express').Router();
 const jwt = require("jsonwebtoken")

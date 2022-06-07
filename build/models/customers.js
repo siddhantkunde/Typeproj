@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const { Model } = require('objection');
-class Customer extends Model {
+const { Model, RelationMappings } = require('objection');
+class User extends Model {
     static get tableName() {
         return "users";
     }
 }
-exports.default = Customer;
+exports.default = User;

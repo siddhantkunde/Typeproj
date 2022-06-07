@@ -1,4 +1,4 @@
-import Customer from "../models/customers";
+import User from "../models/customers";
 import Product from '../models/products';
 import express ,{Application,NextFunction,Request,Response}from 'express';
 const router = require('express').Router();
@@ -60,7 +60,7 @@ router.post("/register",async (req:Request,res:Response,next:NextFunction) =>{
       
     // check if user already exist
     // Validate if user exist in our database
-      const oldUser = await Customer.query().findOne({ email });
+      const oldUser = await User.query().findOne({ email });
 
       if (oldUser) {
          return res.status(409).send("User Already Exist. Please Login");
@@ -70,7 +70,7 @@ router.post("/register",async (req:Request,res:Response,next:NextFunction) =>{
       const hashedPassword = await bcrypt.hash(password, 10);
 
 
-      const user = await Customer.query().insert({
+      const user = await User.query().insert({
 
          name,
          phone,
@@ -103,7 +103,7 @@ router.post("/register",async (req:Request,res:Response,next:NextFunction) =>{
 router.post('/login',async (req:Request,res:Response,next:NextFunction) => {
 
     //checking if the email exists
-    const user= await Customer.query().findOne({email:req.body.email});
+    const user= await User.query().findOne({email:req.body.email});
     if(!user)return res.status(400).send("email is not found");
     //checking for password
     const ValidPass = await bcrypt.compare(req.body.password,user.password);

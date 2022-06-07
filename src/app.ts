@@ -1,5 +1,5 @@
 import express ,{Application,Request,Response}from 'express';
-import Customer  from './models/customers';
+import User  from './models/customers';
 const setupDb=require('./db/db-setup');
 const app:Application = express();
 const port:number=8080  
