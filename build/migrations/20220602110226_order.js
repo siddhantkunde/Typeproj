@@ -12,31 +12,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.down = exports.up = void 0;
 function up(knex) {
     return __awaiter(this, void 0, void 0, function* () {
-        return knex.schema
-            .createTable('users', (table) => {
+        return knex.schema.createTable('orders', (table) => {
             table.increments();
-            table.string("name").notNullable().unique();
-            table.string("email").notNullable().unique();
-            table.bigInteger("phone");
-            table.string("password").notNullable();
+            table.integer('user_id');
+            table.foreign('user_id').references('id').inTable('users').index().onDelete('cascade');
+            table.string("name").notNullable();
+            table.string("status").notNullable();
+            table.integer("bill").notNullable();
             table.timestamps(true, true);
         });
-        // .createTable('orders',(table: Knex.TableBuilder)=>{
-        //     table.increments();
-        //     table.bigInteger('user_id');
-        //     table.foreign('user_id').references('id').inTable('users').onDelete('cascade');
-        //     table.string('order_name').notNullable().unique();
-        //     table.string("status").notNullable().defaultTo("not-delivered");
-        //     table.timestamps(true,true);
-        // })
     });
 }
 exports.up = up;
 function down(knex) {
     return __awaiter(this, void 0, void 0, function* () {
-        return knex.schema;
-        // .dropTableIfExists("orders")
-        // .dropTableIfExists("users")
+        return knex.schema
+            .dropTableIfExists("orders");
     });
 }
 exports.down = down;

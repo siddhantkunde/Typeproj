@@ -1,7 +1,6 @@
 
 import Customer from "../models/customers";
 import express ,{Application,NextFunction,Request,Response}from 'express';
-import { nextTick } from 'process';
 const router = require('express').Router();
 const jwt = require("jsonwebtoken")
 const SECRET = "node1234"

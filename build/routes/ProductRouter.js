@@ -15,77 +15,63 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const products_1 = __importDefault(require("../models/products"));
 const router = require('express').Router();
 const verify = require('./verify_route');
-//fetch all items
-router.get('/product', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+// fetch an item
+router.get('/product/:id', verify, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const items = yield products_1.default.find({});
-        res.status(200).send(items);
+        const { id } = req.params;
+        const item = yield products_1.default.query().findById(id);
+        res.json(item);
     }
     catch (error) {
-        res.status(400).send(error);
-    }
-}));
-//fetch an item
-router.get('/product/:id', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const item = yield products_1.default.findOne({ _id: req.params.id });
-        if (!item) {
-            res.status(404).send({ error: "Item not found" });
-        }
-        res.status(200).send(item);
-    }
-    catch (error) {
-        res.status(400).send(error);
+        console.error(error);
+        res.status(500).json(error).send('access Denied');
     }
 }));
 //create an item
-router.post('/items', verify, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/product', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const newproduct = yield products_1.default.query().insert({
-            Uid: req.body.Uid,
-            name: String(req.body.name),
-            category: req.body.category,
-            price: Number(req.body.phone),
+        // Get product input 
+        const { user_id, name, category, price } = req.body;
+        const product = yield products_1.default.query().insert({
+            user_id,
+            name,
+            category,
+            price
         });
-        res.status(201).send(newproduct);
+        res.status(200).json(product);
     }
-    catch (error) {
-        console.log({ error });
-        res.status(400).send({ message: "error" });
+    catch (err) {
+        console.log(err);
     }
 }));
 //update an item
 router.put('/product/:id', verify, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const updates = Object.keys(req.body);
-    const allowedUpdates = ['name', 'category', 'price'];
-    const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
-    if (!isValidOperation) {
-        return res.status(400).send({ error: 'invalid updates' });
-    }
     try {
-        const item = yield products_1.default.findOne({ _id: req.params.id });
-        if (!item) {
-            return res.status(404).send();
-        }
-        updates.forEach((update) => item[update] = req.body[update]);
-        yield item.save();
-        res.send(item);
+        const { id } = req.params;
+        const item = yield products_1.default.query().where({ id })
+            .update({
+            name: req.body.name,
+            price: req.body.price,
+            updated_at: new Date(),
+        });
+        res.json(item);
     }
-    catch (error) {
-        res.status(400).send(error);
+    catch (err) {
+        console.error(err);
+        res.status(500).json(err).send('Invalid name and price');
     }
 }));
 //delete item
-router.delete('/product/:id', verify, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.delete('/product/:id', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const deletedItem = yield products_1.default.findOneAndDelete({ _id: req.params.id });
-        if (!deletedItem) {
-            res.status(404).send({ error: "Product not found" });
-        }
-        res.send(deletedItem);
+        const { id } = req.params;
+        const prod = yield products_1.default.query().deleteById(id);
+        res.json(prod);
     }
-    catch (error) {
-        res.status(400).send(error);
+    catch (err) {
+        console.error(err);
+        res.status(500).json(err).send('product is not deleted');
+        ;
     }
 }));
 module.exports = router;

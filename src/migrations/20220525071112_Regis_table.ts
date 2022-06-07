@@ -11,15 +11,7 @@ export async function up(knex: Knex): Promise<void> {
             table.string("password").notNullable();
             table.timestamps(true,true);
         })
-        .createTable('products',(table: Knex.TableBuilder)=>{
 
-            table.increments();
-            table.integer('Uid').references('id').inTable('users');
-            table.string("name").notNullable()
-            table.string("category").notNullable()
-            table.integer("price").notNullable()
-            table.timestamps(true,true);
-        })
         // .createTable('orders',(table: Knex.TableBuilder)=>{
         //     table.increments();
         //     table.bigInteger('user_id');
@@ -35,10 +27,7 @@ export async function up(knex: Knex): Promise<void> {
 export async function down(knex: Knex): Promise<void> {
     return knex.schema
         // .dropTableIfExists("orders")
-        .dropTableIfExists("users")
-        .dropTableIfExists("products")
-        
-
+        // .dropTableIfExists("users")
 }
 
 

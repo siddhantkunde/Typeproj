@@ -1,4 +1,5 @@
 import Customer from "../models/customers";
+import Product from '../models/products';
 import express ,{Application,NextFunction,Request,Response}from 'express';
 const router = require('express').Router();
 const bcrypt =require('bcrypt')
@@ -36,9 +37,7 @@ declare module "express" {
 //  })
 
 router.post("/register",async (req:Request,res:Response,next:NextFunction) =>{
-
-
-
+   
    try {
 
    // Get user input
@@ -102,6 +101,7 @@ router.post("/register",async (req:Request,res:Response,next:NextFunction) =>{
 
 //login customer
 router.post('/login',async (req:Request,res:Response,next:NextFunction) => {
+
     //checking if the email exists
     const user= await Customer.query().findOne({email:req.body.email});
     if(!user)return res.status(400).send("email is not found");
@@ -116,13 +116,7 @@ router.post('/login',async (req:Request,res:Response,next:NextFunction) => {
   })
 
 
-
-
-
-
-
-
-module.exports = router;
+module.exports = router
 
 
 
