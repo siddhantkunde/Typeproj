@@ -10,11 +10,11 @@ class Product extends Model {
 }
 exports.default = Product;
 Product.relationMappings = {
-    user: {
+    owner: {
         relation: Model.BelongsToOneRelation,
         modelClass: require('./customers').default,
         join: {
-            from: 'products.users_id',
+            from: 'products.user_id',
             to: 'users.id'
         }
     }

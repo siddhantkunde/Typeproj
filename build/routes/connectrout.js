@@ -13,14 +13,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const products_1 = __importDefault(require("../models/products"));
+const verify = require('./verify_route');
 const db = require('../db/db-setup');
 const router = require('express').Router();
-router.get('/:id/product', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/:id/product', verify, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        // const myUser = await Product.query().eager('user').findById(id)
+        // const product = await Product.query().findById(id).withGraphFetched('owner')
         const product = yield products_1.default.query().findById(id);
-        const customer = yield product.$relatedQuery('user');
+        const customer = yield product.$relatedQuery('owner');
+        // console.log(customer);
+        //$relatedQuery
         res.status(201).json(customer);
     }
     catch (err) {

@@ -8,11 +8,11 @@ export default class Product extends Model {
 		return "products";
 	}
 	static relationMappings:RelationMappings = {
-		user:{
+		owner:{
 		    relation: Model.BelongsToOneRelation,
 		    modelClass: require('./customers').default,
 		    join: {
-			    from:'products.users_id',
+			    from:'products.user_id',
 			    to: 'users.id'
 		    }
 		}

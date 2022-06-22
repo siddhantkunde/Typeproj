@@ -1,5 +1,6 @@
 import User from "../models/customers";
 import Product from '../models/products';
+const verify=require('./verify_route')
 
 const db = require ('../db/db-setup')
 import express ,{Application,NextFunction,Request,Response}from 'express';
@@ -12,12 +13,15 @@ declare module "express" {
 
 
 
-router.get('/:id/product', async (req:Request,res:Response,next:NextFunction) => {
+router.get('/:id/product', verify,async (req:Request,res:Response,next:NextFunction) => {
   try {
       const { id } = req.params;
-      // const myUser = await Product.query().eager('user').findById(id)
+      // const product = await Product.query().findById(id).withGraphFetched('owner')
       const product= await Product.query().findById(id);
-      const customer = await product.$relatedQuery('user')
+      const customer = await product.$relatedQuery('owner')
+      
+      // console.log(customer);
+      //$relatedQuery
       res.status(201).json(customer)
   } catch (err) {
     console.log(err);         

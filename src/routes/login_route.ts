@@ -77,17 +77,17 @@ router.post("/register",async (req:Request,res:Response,next:NextFunction) =>{
          email: email.toLowerCase(), // sanitize: convert email to lowercase
          password: hashedPassword,
       });
-      // Create token
-      const token = jwt.sign(
+      // // Create token
+      // const token = jwt.sign(
 
-         { user_id: user._id, email },
-         SECRET,
-         { 
-            expiresIn: "2h",
-         }
-      );
-      // save user token
-      user.token = token;
+      //    { user_id: user._id, email },
+      //    SECRET,
+      //    { 
+      //       expiresIn: "2h",
+      //    }
+      // );
+      // // save user token
+      // user.token = token;
 
       // return new user
       res.status(201).json(user);
@@ -110,9 +110,9 @@ router.post('/login',async (req:Request,res:Response,next:NextFunction) => {
     if(!ValidPass)return res.status(400).send('Invalid password');
     //create and assign a token
     const token=jwt.sign({_id:user._id},SECRET);
-    // res.header('auth-token',token).send(token);
-    res.status(200).send(token);
-
+   //  res.header('auth-token',token).send(token);
+    res.status(200).json(token);
+ 
   })
 
 

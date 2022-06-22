@@ -8,12 +8,12 @@ export default class User extends Model {
 		return "users";
 	}
 	// static relationMappings:RelationMappings = {
-	// 	product:{
-	// 		relation: Model.BelongsToOneRelation,
+	// 	prod:{
+	// 		relation: Model.HasManyRelation,
 	// 		modelClass: require('./products').default,
 	// 		join: {
-	// 			from: 'product.user_id',
-	// 			to: 'users.id'
+	// 			from:'users.id',
+	// 			to:'product.user_id'
 	// 		}
 	// 	}
 	// };

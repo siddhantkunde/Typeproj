@@ -4,8 +4,6 @@ import { Knex } from "knex";
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable('products',(table: Knex.TableBuilder)=>{
         table.increments()
-        table.integer('user_id')
-        table.foreign('user_id').references('id').inTable('users').onDelete('cascade');
         table.string("name").notNullable()
         table.string("category").notNullable()
         table.integer("price").notNullable()
@@ -20,3 +18,4 @@ export async function down(knex: Knex): Promise<void> {
     .dropTableIfExists("products")
 }
 
+        // table.foreign('user_id').references('id').inTable('users').onDelete('cascade');

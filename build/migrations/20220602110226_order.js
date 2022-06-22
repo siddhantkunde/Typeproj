@@ -12,12 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.down = exports.up = void 0;
 function up(knex) {
     return __awaiter(this, void 0, void 0, function* () {
-        return knex.schema.createTable('orders', (table) => {
+        return knex.schema.createTable('cart', (table) => {
             table.increments();
-            table.integer('user_id');
-            table.foreign('user_id').references('id').inTable('users').index().onDelete('cascade');
-            table.string("name").notNullable();
-            table.string("status").notNullable();
+            table.integer('user_id').references('id').inTable('users').index().onDelete('cascade');
+            table.integer('prod_id').references('id').inTable('products').index().onDelete('cascade');
+            table.string("status").notNullable().defaultTo("processing");
+            table.integer("quantity").notNullable().defaultTo("1");
             table.integer("bill").notNullable();
             table.timestamps(true, true);
         });
@@ -27,7 +27,7 @@ exports.up = up;
 function down(knex) {
     return __awaiter(this, void 0, void 0, function* () {
         return knex.schema
-            .dropTableIfExists("orders");
+            .dropTableIfExists("cart");
     });
 }
 exports.down = down;

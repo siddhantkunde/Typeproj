@@ -32,6 +32,11 @@ router.post('/product', (req, res, next) => __awaiter(void 0, void 0, void 0, fu
     try {
         // Get product input 
         const { user_id, name, category, price } = req.body;
+        if (isNaN(req.body.price)) {
+            return res.status(403).send({
+                error: "price is not valid number"
+            });
+        }
         const product = yield products_1.default.query().insert({
             user_id,
             name,

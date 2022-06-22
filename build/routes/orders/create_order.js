@@ -34,9 +34,10 @@ router.get("/order", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
 router.post('/order', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // Get product input 
-        const { user_id, name, category, price } = req.body;
+        const { user_id, product_id, name, category, price } = req.body;
         const product = yield orders_1.default.query().insert({
             user_id,
+            product_id,
             name,
             category,
             price

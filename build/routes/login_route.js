@@ -69,12 +69,16 @@ router.post("/register", (req, res, next) => __awaiter(void 0, void 0, void 0, f
             email: email.toLowerCase(),
             password: hashedPassword,
         });
-        // Create token
-        const token = jwt.sign({ user_id: user._id, email }, SECRET, {
-            expiresIn: "2h",
-        });
-        // save user token
-        user.token = token;
+        // // Create token
+        // const token = jwt.sign(
+        //    { user_id: user._id, email },
+        //    SECRET,
+        //    { 
+        //       expiresIn: "2h",
+        //    }
+        // );
+        // // save user token
+        // user.token = token;
         // return new user
         res.status(201).json(user);
     }
@@ -94,7 +98,7 @@ router.post('/login', (req, res, next) => __awaiter(void 0, void 0, void 0, func
         return res.status(400).send('Invalid password');
     //create and assign a token
     const token = jwt.sign({ _id: user._id }, SECRET);
-    // res.header('auth-token',token).send(token);
-    res.status(200).send(token);
+    //  res.header('auth-token',token).send(token);
+    res.status(200).json(token);
 }));
 module.exports = router;

@@ -21,11 +21,16 @@ router.get('/product/:id',verify,async (req:Request,res:Response) => {
 
 //create an item
 router.post('/product',async (req:Request,res:Response,next:NextFunction) => {
-   
     try {
- 
+
         // Get product input 
        const { user_id,name,category,price} = req.body;
+
+        if (isNaN(req.body.price)) {
+            return res.status(403).send({
+                error:"price is not valid number"
+            })
+        } 
  
        const product = await Product.query().insert({
           user_id,
